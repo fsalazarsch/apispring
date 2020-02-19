@@ -17,30 +17,30 @@ import com.lealtad360.panelscotiacms.entity.services.ICategoriaService;
 public class CategoriaController{
 
 	@Autowired
-	ICategoriaService categoriaService;
+	ICategoriaService categoriaservice;
 	
-	@GetMapping("/Categorias")
+	@GetMapping("/categorias")
 	public List<Categoria> getAllCategorias() {
-		return categoriaService.getAll();
+		return categoriaservice.getAll();
 	}
 	
-	@GetMapping("/Categorias/{id}")
+	@GetMapping("/categorias/{id}")
 	public Categoria getOne(@PathVariable(value = "id") long id ) {
-		return categoriaService.get(id);
+		return categoriaservice.get(id);
 	}
 	
-	@PostMapping("/Categorias")
+	@PostMapping("/categorias")
 	public void add(Categoria Categoria) {
-		categoriaService.post(Categoria);
+		categoriaservice.post(Categoria);
 	}
 	
-	@PutMapping("/Categorias")
+	@PutMapping("/categorias")
 	public void update(Categoria Categoria, long id) {
-		categoriaService.put(Categoria, id);
+		categoriaservice.put(Categoria, id);
 	}
 	
 	@DeleteMapping
 	public void delete(long id) {
-		categoriaService.delete(id);
+		categoriaservice.delete(id);
 	}
 }
