@@ -23,4 +23,30 @@ public static final long serialVersionUID = 1L;
 	private String dateCreateAt;
 	private String dateUpdateAt;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getNombreCategoria() {
+		return nombreCategoria;
+	}
+	public void setNombreCategoria(String nombreCategoria) {
+		this.nombreCategoria = nombreCategoria;
+	}
+	public String getDateCreateAt() {
+		return dateCreateAt;
+	}
+	public void setDateCreateAt(String dateCreateAt) {
+		this.dateCreateAt = dateCreateAt;
+	}
+	public String getDateUpdateAt() {
+		return dateUpdateAt;
+	}
+	public void setDateUpdateAt(String dateUpdateAt) {
+		this.dateUpdateAt = dateUpdateAt;
+	}
+
+	public Categoria() {}
 }
