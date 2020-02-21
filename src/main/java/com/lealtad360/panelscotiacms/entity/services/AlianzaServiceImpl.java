@@ -2,11 +2,16 @@ package com.lealtad360.panelscotiacms.entity.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.lealtad360.panelscotiacms.entity.dao.IAlianzaDao;
 import com.lealtad360.panelscotiacms.entity.models.Alianza;
 
+@Service
 public class AlianzaServiceImpl implements IAlianzaService {
 	
+	@Autowired
 	private IAlianzaDao alianzaDao;
 	
 	@Override

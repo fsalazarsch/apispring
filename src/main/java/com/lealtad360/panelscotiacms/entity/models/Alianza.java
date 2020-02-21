@@ -2,6 +2,7 @@ package com.lealtad360.panelscotiacms.entity.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +11,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name= "Alinzas")
+@Table(name= "Alianzas")
+
 public class Alianza implements Serializable{
 	public static final long serialVersionUID = 1L;
 	
@@ -22,7 +24,9 @@ public class Alianza implements Serializable{
 	private String nombreAlianza;
 	
 	private String link;
+
 	private String dateCreateAt;
+	
 	private String dateUpdateAt;
 	
 	private String imagen;

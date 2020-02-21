@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table
+@Table( name = "Categorias")
 public class Categoria implements Serializable{
 public static final long serialVersionUID = 1L;
 	

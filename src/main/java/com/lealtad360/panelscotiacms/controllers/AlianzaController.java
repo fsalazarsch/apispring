@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.lealtad360.panelscotiacms.entity.models.Alianza;
 import com.lealtad360.panelscotiacms.entity.services.IAlianzaService;
 
+
+@RestController
 public class AlianzaController {
 
 	@Autowired
@@ -37,7 +40,7 @@ public class AlianzaController {
 		alianzaservice.put(alianza, id);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/empresa/{id}")
 	public void delete(long id) {
 		alianzaservice.delete(id);
 	}

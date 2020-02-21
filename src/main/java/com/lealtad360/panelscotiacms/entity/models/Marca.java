@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name = "marcas")
+@Table(name = "Marcas")
 public class Marca implements Serializable{
 	public static final long serialVersionUID = 1L;
 	
