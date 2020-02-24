@@ -1,5 +1,6 @@
 package com.lealtad360.panelscotiacms.entity.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,36 @@ public class BeneficioServiceImpl implements IBeneficioService{
 	@Override
 	public void delete(long id) {
 		beneficioDao.deleteById(id);
+		
+	}
+
+	@Override
+	public List<Beneficio> getBybeneficiomarca(long ali, String categ) {
+		
+	    List<Beneficio> filteredList = new ArrayList<>();
+	    List<Beneficio> originalList = (List<Beneficio>) beneficioDao.findAll();
+		
+	    for (Beneficio beneficio : originalList) {
+	    	if(beneficio.getAlianza_id() == ali)
+	    		if ( beneficio.getNombre_categoria().equals(categ))
+	    			filteredList.add(beneficio);
+	    	
+	    }
+		
+		
+		//aux.stream().filter(arg0)
+		return filteredList;
+	}
+
+	@Override
+	public void cambiarEstado(long id, long estado) {
+		/*
+		beneficioDao.findById(id)
+		.ifPresent((x)->{
+			
+			beneficioDao.save(beneficio);
+		} );*/
+		
 		
 	}
 

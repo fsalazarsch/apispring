@@ -28,6 +28,11 @@ public class BeneficioController {
 	public Beneficio getOne(@PathVariable(value = "id") long id ) {
 		return beneficioservice.get(id);
 	}
+
+	@GetMapping("/beneficio/{ali}/{categ}")
+	public List<Beneficio> getBybeneficiomarca(@PathVariable(value = "ali") long ali, @PathVariable(value = "categ") String categ ) {
+		return beneficioservice.getBybeneficiomarca( ali, categ);
+	}
 	
 	@PostMapping("/beneficio")
 	public void add(Beneficio beneficio) {

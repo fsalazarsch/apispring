@@ -39,7 +39,13 @@ public static final long serialVersionUID = 1L;
 	@JoinColumn(name = "alianzaId", insertable= false, updatable = false)
 	private Alianza alianza;
 	
-
+	@OneToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name = "categoriaId", insertable= false, updatable = false)
+	private Categoria categoria;
+	
+	@OneToOne(cascade= {CascadeType.ALL})
+	@JoinColumn(name = "marcaId", insertable= false, updatable = false)
+	private Marca marca;
 	
 	public long getId() {
 		return id;
@@ -47,24 +53,7 @@ public static final long serialVersionUID = 1L;
 	public void setId(long id) {
 		this.id = id;
 	}
-	public long getAlianzaid() {
-		return alianzaId;
-	}
-	public void setAlianzaid(long alianza) {
-		this.alianzaId = alianza;
-	}
-	public long getCategoria() {
-		return categoriaId;
-	}
-	public void setCategoria(long categoria) {
-		this.categoriaId = categoria;
-	}
-	public long getMarca() {
-		return marcaId;
-	}
-	public void setMarca(long marca) {
-		this.marcaId = marca;
-	}
+	
 	public long getCatidadBeneficios() {
 		return cantidadBeneficios;
 	}
@@ -112,31 +101,40 @@ public static final long serialVersionUID = 1L;
 	
 	public Beneficio() {}
 
-	@Override
-	public String toString() {
-		return "Beneficio [id=" + id + ", alianzaId=" + alianzaId + ", categoriaId=" + categoriaId + ", marcaId="
-				+ marcaId + ", cantidadBeneficios=" + cantidadBeneficios + ", dateCreateAt=" + dateCreateAt
-				+ ", dateUpdateAt=" + dateUpdateAt + ", cuotas=" + cuotas + ", descuento=" + descuento
-				+ ", fechaPeriodo=" + fechaPeriodo + ", estado=" + estado + ", alianza=" + alianza + "]";
+
+	public String getNombre_alianza() {
+		return alianza.getNombreAlianza();
 	}
-	public Alianza getAlianza() {
-		return alianza;
+
+	public Long getAlianza_id() {
+		return alianza.getId();
 	}
 	public void setAlianza(Alianza alianza) {
 		this.alianza = alianza;
 	}
-    
-	/*"nombre_alianza": "CMR Falabella",
-    "nombre_categoria": "Viajes",
-    "id": "1",
-    "cantidad_beneficios": "1",
-    "alianza_id": "1",
-    "categoria_id": "1",
-    "dateCrfecha_periodoeate_at": "2019-05-10 22:00:04",
-    "dateUpdate_at": "2020-02-07 00:00:00",
-    "cuotas": "",
-    "descuento": "0",
-    "": "2020-01-20",
-    "marca_id": "1",
-    "estado": "1"*/
+
+	public String getNombre_categoria() {
+		return categoria.getNombreCategoria();
+	}
+
+	public Long getCategoria_id() {
+		return categoria.getId();
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public String getNombre_marca() {
+		return marca.getNombreMarca();
+	}
+
+	public Long getMarca_id() {
+		return marca.getId();
+	}
+	
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+	
 }

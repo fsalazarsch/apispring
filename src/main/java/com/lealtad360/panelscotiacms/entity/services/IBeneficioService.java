@@ -8,6 +8,8 @@ public interface IBeneficioService {
 
 	public Beneficio get(long id);
 	public List<Beneficio> getAll();
+	public List<Beneficio> getBybeneficiomarca(long ali, String categ);
+	public void cambiarEstado(long id, long estado);
 	public void post(Beneficio beneficio);
 	public void put(Beneficio beneficio, long id);
 	public void delete(long id);
