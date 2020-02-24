@@ -1,5 +1,6 @@
 package com.lealtad360.panelscotiacms.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,17 @@ public class BeneficioController {
 		return beneficioservice.getBybeneficiomarca( ali, categ);
 	}
 	
+	@GetMapping("/monitor")
+	public HashMap<String, Integer> monitor(){		
+		return beneficioservice.monitor();
+	}
+	
+	/*Reemplazar por el put mapping*/
+	@GetMapping("/beneficio_estado/{id}/{estado}")
+	public void cambiarEstado(@PathVariable(value = "id") long id, @PathVariable(value = "estado") long estado ){
+		beneficioservice.cambiarEstado(id, estado);
+	}
+
 	@PostMapping("/beneficio")
 	public void add(Beneficio beneficio) {
 		beneficioservice.post(beneficio);
