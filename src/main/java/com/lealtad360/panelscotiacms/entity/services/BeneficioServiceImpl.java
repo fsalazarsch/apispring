@@ -1,7 +1,10 @@
 package com.lealtad360.panelscotiacms.entity.services;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,9 @@ public class BeneficioServiceImpl implements IBeneficioService{
 	
 	@Autowired
 	private IBeneficioDao beneficioDao;
+	@Autowired
 	private IAlianzaDao alianzadao;
+	@Autowired
 	private ICategoriaDao categoriadao;
 	
 	@Override
@@ -54,15 +59,24 @@ public class BeneficioServiceImpl implements IBeneficioService{
 	}
 
 	@Override
-	public List<Beneficio> getBybeneficiomarca(long ali, String categ) {
+	public List<Beneficio> getBybeneficiomarca(long ali, String categ, boolean monitor) {
 		
 	    List<Beneficio> filteredList = new ArrayList<>();
 	    List<Beneficio> originalList = (List<Beneficio>) beneficioDao.findAll();
 		
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");  
+	    Date date = new Date();  
+	    
 	    for (Beneficio beneficio : originalList) {
 	    	if(beneficio.getAlianza_id() == ali)
-	    		if ( beneficio.getNombre_categoria().equals(categ) || beneficio.getCategoria_id().toString().equals(categ) )
-	    			filteredList.add(beneficio);
+	    		if ( beneficio.getNombre_categoria().equals(categ) || beneficio.getCategoria_id().toString().equals(categ)){
+	    			if (monitor == true) {
+	    				if ( (beneficio.getEstado() == 1) && (beneficio.getFechaPeriodo().startsWith(formatter.format(date))))
+	    					filteredList.add(beneficio);
+	    			}
+	    			else
+	    				filteredList.add(beneficio);
+	    		}
 	    	
 	    }
 		
@@ -83,28 +97,34 @@ public class BeneficioServiceImpl implements IBeneficioService{
 
 	
 	@Override
-	public HashMap<String, Integer> monitor() {
+	public List<Map<String, Integer>> monitor() {
 	//public void monitor() {
 		System.out.print("asdasdas");
 
-		HashMap<String, Integer> filteredList = new HashMap< String, Integer>();
-	    
-		List<Alianza> a = new ArrayList<Alianza>();
-		a = (List<Alianza>) alianzadao.findAll();
+		//List filteredList = new ArrayList();
+		List<Map<String, Integer>> filteredList = new ArrayList<>();
+
+		
+		List<Alianza> a = (List<Alianza>) alianzadao.findAll();
+		
 		List<Categoria> c = (List<Categoria>) categoriadao.findAll();
 		
-		
+		int i = 0;
 		for( Alianza alianza : a ) {
+			HashMap<String, Integer> aux = new HashMap< String, Integer>();
+
 			for (Categoria categoria : c) {
-		    	filteredList.put("imagen", (int) alianza.getId());
+		    	aux.put("imagen", (int) alianza.getId());
 		    	
-		    	int count = getBybeneficiomarca((long) alianza.getId(), categoria.getNombreCategoria()).size();
+		    	int count = getBybeneficiomarca((long) alianza.getId(), categoria.getNombreCategoria(), true).size();
 		    	
-		    	filteredList.put( categoria.getNombreCategoria(), count );
+		    	aux.put( categoria.getNombreCategoria(), count );
 
 			}
+			filteredList.add(i, aux);
+			i += 1;
 		}
-		return filteredList;
+		return  filteredList;
 	}
 	
 	

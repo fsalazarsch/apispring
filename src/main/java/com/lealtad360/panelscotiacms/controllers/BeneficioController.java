@@ -2,6 +2,7 @@ package com.lealtad360.panelscotiacms.controllers;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,11 +33,11 @@ public class BeneficioController {
 
 	@GetMapping("/beneficio/{ali}/{categ}")
 	public List<Beneficio> getBybeneficiomarca(@PathVariable(value = "ali") long ali, @PathVariable(value = "categ") String categ ) {
-		return beneficioservice.getBybeneficiomarca( ali, categ);
+		return beneficioservice.getBybeneficiomarca( ali, categ, false);
 	}
 	
 	@GetMapping("/monitor")
-	public HashMap<String, Integer> monitor(){		
+	public List<Map<String, Integer>> monitor(){		
 		return beneficioservice.monitor();
 	}
 	
