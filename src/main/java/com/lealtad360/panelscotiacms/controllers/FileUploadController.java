@@ -30,7 +30,13 @@ public class FileUploadController {
             byte[] bytes = file.getBytes();
 
             String currentdir = System.getProperty("user.dir");
-            System.out.println(currentdir);
+
+            String rootPath = System.getProperty("catalina.home");
+            File dir = new File(rootPath + File.separator + "tmpFiles");
+            if (!dir.exists())
+                dir.mkdirs();
+
+            
             
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
