@@ -55,7 +55,7 @@ public class FileUploadService  {
     }
 	
 	
-	public void uploadFile(MultipartFile file, String periodo) throws IllegalStateException, IOException {
+	public void uploadFile(MultipartFile file, String periodo, int id_banco) throws IllegalStateException, IOException {
 		
 		String ruta_abs = rutaServer+periodo+separador;
 		
@@ -64,23 +64,30 @@ public class FileUploadService  {
 			destDir.mkdir();
 		}
 		
-		if (file.getOriginalFilename().endsWith(".zip")) {
+		if (periodo == "bancos") {
+
 			File newfile = new File(ruta_abs+file.getOriginalFilename());
 			file.transferTo(newfile);
-	        try {
-	            unzip(ruta_abs+file.getOriginalFilename(), ruta_abs);
-	        } catch (Exception ex) {
-	            // some errors occurred
-	            ex.printStackTrace();
-	        }
-	    
-	        if(newfile.delete()) {
-	        	System.out.println("OK");
-	        }
 		}
-		else
-			file.transferTo(new File(ruta_abs+file.getOriginalFilename()));
+		else {
 		
+			if (file.getOriginalFilename().endsWith(".zip")) {
+				File newfile = new File(ruta_abs+file.getOriginalFilename());
+				file.transferTo(newfile);
+		        try {
+		            unzip(ruta_abs+file.getOriginalFilename(), ruta_abs);
+		        } catch (Exception ex) {
+		            // some errors occurred
+		            ex.printStackTrace();
+		        }
+		    
+		        if(newfile.delete()) {
+		        	System.out.println("OK");
+		        }
+				}
+			else
+				file.transferTo(new File(ruta_abs+file.getOriginalFilename()));
+		}
 	}
 	
 

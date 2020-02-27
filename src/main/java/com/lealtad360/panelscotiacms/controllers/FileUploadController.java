@@ -21,5 +21,9 @@ FileUploadService fileuploadservice;
 		fileuploadservice.uploadFile(file, periodo);
 	}
 	
+	@PostMapping("/subir_archivo_alianza/{{id}}")
+	public void uploadFile2(@RequestParam("file") MultipartFile file, @PathVariable(value = "id") String id ) throws IllegalStateException, IOException {
+		fileuploadservice.uploadFile(file, "bancos");
+	}
 	
 }
