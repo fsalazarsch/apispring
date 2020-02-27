@@ -65,12 +65,17 @@ public class FileUploadService  {
 		}
 		
 		if (file.getOriginalFilename().endsWith(".zip")) {
-			
+			File newfile = new File(ruta_abs+file.getOriginalFilename());
+			file.transferTo(newfile);
 	        try {
 	            unzip(ruta_abs+file.getOriginalFilename(), ruta_abs);
 	        } catch (Exception ex) {
 	            // some errors occurred
 	            ex.printStackTrace();
+	        }
+	    
+	        if(newfile.delete()) {
+	        	System.out.println("OK");
 	        }
 		}
 		else
